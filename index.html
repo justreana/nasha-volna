@@ -51,18 +51,53 @@ h1{font-size:clamp(34px,4.4vw,52px);line-height:1.03;letter-spacing:-.035em;font
 .lede{font-size:17px;line-height:1.55;color:var(--ink2);max-width:52ch;margin:0 0 30px}
 .lede em{color:var(--ink);font-style:normal;font-weight:600}
 
-.block{border-top:1px solid var(--line);padding:22px 0 0;margin:0 0 22px}
+.brief{counter-reset:blk}
+.block{border-top:1px solid var(--line);padding:22px 0 0;margin:0 0 22px;scroll-margin-top:24px}
+.block h2{counter-increment:blk}
+.block h2::before{content:counter(blk,decimal-leading-zero) " · ";color:rgba(255,255,255,.22);font-weight:700}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 30px}
+.toc button{background:rgba(255,255,255,.055);border:1px solid var(--line);color:var(--ink2);font-size:12px;font-weight:550;padding:7px 12px;border-radius:999px;cursor:pointer;font-family:inherit;letter-spacing:-.01em;transition:all .2s}
+.toc button:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
+.states{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.st-row{display:flex;gap:13px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-m);padding:12px 14px}
+.st-dot{width:7px;height:7px;border-radius:50%;background:#35D6A4;flex:0 0 auto;margin-top:6px}
+.st-dot.warn{background:var(--plus)}
+.st-t{font-size:13px;font-weight:650;margin-bottom:3px;letter-spacing:-.015em}
+.st-d{font-size:12.5px;color:var(--ink3);line-height:1.45}
 .block h2{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:0 0 14px}
 .block p{font-size:15px;line-height:1.6;color:var(--ink2);margin:0 0 12px;max-width:56ch}
 .block p:last-child{margin-bottom:0}
 .block strong{color:var(--ink);font-weight:600}
 
-.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:10px}
 .metric{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-m);padding:14px 15px}
 .metric .m-t{font-size:13px;font-weight:650;margin-bottom:5px;letter-spacing:-.01em}
 .metric .m-d{font-size:12.5px;line-height:1.45;color:var(--ink3)}
 .metric.guard{border-color:rgba(255,219,77,.22)}
 .metric.guard .m-t{color:var(--plus)}
+.metric .m-k{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:6px}
+.metric.guard .m-k{color:rgba(255,219,77,.5)}
+
+.rel{display:flex;flex-direction:column;gap:9px;margin:14px 0 0}
+.rel-row{display:flex;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-m);padding:13px 15px}
+.rel-n{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);flex:0 0 72px;padding-top:2px;line-height:1.3}
+.rel-t{font-size:13.5px;font-weight:650;margin-bottom:4px;letter-spacing:-.015em}
+.rel-d{font-size:12.5px;color:var(--ink3);line-height:1.45}
+.srch{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.13);border-radius:13px;padding:12px 14px;margin:0 20px 6px}
+.srch .sq{flex:1;font-size:14.5px;color:#fff;letter-spacing:-.01em}
+.addb{width:30px;height:30px;border-radius:50%;background:#fff;color:#000;border:0;display:grid;place-items:center;cursor:pointer;flex:0 0 auto;transition:transform .16s}
+.addb:active{transform:scale(.86)}
+.addb.done{background:rgba(53,214,164,.2);color:#35D6A4}
+.vtag{display:inline-block;font-size:9.5px;font-weight:700;color:#35D6A4;background:rgba(53,214,164,.14);padding:2px 5px;border-radius:4px;margin-left:6px;vertical-align:1px;letter-spacing:.02em}
+.funnel{display:flex;flex-direction:column;gap:7px;margin:16px 0 12px}
+.fn-row{display:grid;grid-template-columns:198px 1fr 46px;align-items:center;gap:12px}
+.fn-l{font-size:12.5px;color:var(--ink2);text-align:right;line-height:1.25}
+.fn-b{height:26px;display:flex;align-items:stretch}
+.fn-b i{display:block;height:100%;border-radius:5px;background:rgba(255,255,255,.15);min-width:14px}
+.fn-b.pay i{background:#7B5CFF}
+.fn-v{font-size:13.5px;font-weight:650;font-variant-numeric:tabular-nums;text-align:right;letter-spacing:-.02em}
+.fn-cap{font-size:12px!important;color:var(--ink3)!important;line-height:1.45;margin-bottom:18px!important}
+@media (max-width:560px){.fn-row{grid-template-columns:120px 1fr 42px;gap:9px}.fn-l{font-size:11.5px}}
 
 .speclist{list-style:none;margin:0;padding:0;font-size:13.5px;line-height:1.5;color:var(--ink2)}
 .speclist li{padding:9px 0;border-bottom:1px dashed var(--line);display:flex;gap:12px}
@@ -345,6 +380,16 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;ba
   <h1>«Моя волна»<br>умеет слушать<br>одного. А играет —<br>для компании.</h1>
   <p class="lede">«Моя волна» — ядро продукта: её <em>каждый месяц включают 94% подписчиков</em>. Но в комнате, где собралось пятеро, волна по-прежнему подстраивается под одного — того, чей телефон подключён к колонке. Остальные четверо для продукта не существуют: их вкусы не учитываются, их реакции не собираются, а сами они так и остаются чужими пользователями.</p>
 
+  <nav class="toc" id="toc"></nav>
+
+  <div class="block">
+    <h2>Что уже есть на рынке</h2>
+    <p><strong>Spotify Jam</strong> — ближайший аналог, запущен в сентябре 2023 и живёт до сих пор. Подписчик открывает сессию, остальные подключаются по ссылке, QR-коду или через общую колонку, в том числе бесплатные пользователи, и все могут добавлять треки в общую очередь, скипать и ставить на паузу. До 32 человек, и подбор учитывает вкусы всей группы.</p>
+    <p>Это значит, что сценарий уже провалидирован рынком: крупный игрок три года держит фичу в проде. Спрос на совместное прослушивание можно считать подтверждённым, и вопрос смещается с «нужно ли это людям» на «как сделать это лучше, чем у конкурента». У Яндекс Музыки такого режима нет, при этом пользователи сами просят его на официальном форуме сервиса: предлагают режим «вечеринка», где одно устройство становится хостом, остальные подключаются по ссылке и добавляют треки в очередь. Формулировка запроса почти дословно совпадает с описанным здесь сценарием.</p>
+    <p><strong>Чего у Jam нет — и на чём я строю отличие.</strong> Jam — это общая очередь и больше ничего: когда треки заканчиваются, сессия упирается в пустоту. У меня волна подхватывает сама и держит вечер дальше. Jam не спрашивает, какой это вечер, — нет вайб-пресетов под ситуацию, поэтому в уютные посиделки легко прилетает танцевальный трек. Jam не показывает, чей вкус звучит, — нет ни цветов участников, ни баланса вклада, ни выравнивания. И у Jam нет режима «сюрприз» и нет итогов вечера, то есть нет ни игровой механики, ни повода вернуться на следующий день.</p>
+    <p>Коротко: я беру проверенный каркас и достраиваю его тем, что опирается на собственные фичи Яндекса — «Мою волну», люмены, персональные цвета вайба. Повторить это Spotify не сможет, потому что у него нет такой волны.</p>
+  </div>
+
   <div class="block">
     <h2>Что предлагаю</h2>
     <p><strong>«Наша волна»</strong> — живая сессия поверх существующей «Моей волны». Хозяин показывает QR, гости подключаются за два тапа — <strong>без подписки</strong>, нужен только Яндекс ID, который у большинства уже лежит в телефоне. Волна начинает учитывать вкусы всех, кто в комнате, и честно показывает, чей вкус сейчас звучит.</p>
@@ -360,16 +405,78 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;ba
   </div>
 
   <div class="block">
-    <h2>На какие метрики рассчитываю</h2>
+    <h2>Вход через Станцию с Алисой</h2>
+    <p>Сейчас вход в сессию один: хозяин достаёт телефон, открывает плеер и жмёт «Слушать вместе». Это трение ровно в тот момент, когда он занят гостями, а не телефоном. Станция убирает этот шаг целиком.</p>
+    <p><strong>«Алиса, включи нашу волну»</strong> — колонка сама создаёт комнату и называет код вслух, а на моделях с экраном показывает QR. Хозяину не нужно доставать телефон вообще: он говорит фразу, гости сканируют или вводят код, вечер начался. Тем же способом работает и очередь — «Алиса, поставь в очередь…» снимает необходимость разблокировать телефон ради одного трека.</p>
+    <p>Это не абстрактная возможность: ежемесячное количество активных Станций с Алисой — 24 млн. Точка входа уже стоит в миллионах комнат, причём именно там, где физически происходит сценарий — рядом с компанией и с источником звука.</p>
+    <p><strong>Побочный эффект, который чинит самое неприятное состояние.</strong> Если комнату создала Станция, она же держит сессию. Хозяин может уйти спать, посадить телефон или потерять интернет — Станция остаётся в комнате и остаётся якорем, передавать права никому не нужно. Сценарий с переходом прав к самому активному участнику нужен только для сессий, запущенных с телефона.</p>
+    <p><strong>Чем за это платим.</strong> Станция не покажет, чей вкус сейчас звучит, не даст проголосовать за смену вайба и не покажет баланс вклада. Весь визуальный слой остаётся в телефонах участников, а Станция берёт на себя только вход и голосовое управление. То есть она расширяет воронку на входе, но не заменяет приложение.</p>
+  </div>
+
+  <div class="block">
+    <h2>Метрики</h2>
+    <p>Целевая метрика у фичи одна — <strong>LTV подписчика</strong>. Всё остальное либо объясняет её движение, либо страхует от побочных эффектов. Прямая конверсия гостей в Плюс здесь не главная цель: подписчиков уже 51,9&nbsp;млн, то есть большинство гостей на любой вечеринке уже платят.</p>
     <div class="metrics">
-      <div class="metric"><div class="m-t">Новые MAU без платного трафика</div><div class="m-d">Каждая сессия — 3–6 гостей, которые заходят в продукт по QR. Органический канал привлечения вместо закупки. Считаю K-фактор: гостей на сессию × доля вернувшихся на 7-й день.</div></div>
-      <div class="metric"><div class="m-t">Конверсия в Яндекс Плюс</div><div class="m-d">Гость уходит с вечеринки, имея 7 залайканных треков и сохранённый плейлист. Оффер показывается в момент пика ценности, а не в холодном онбординге. Целевая метрика — CR гость → триал → платящий.</div></div>
-      <div class="metric"><div class="m-t">Длительность сессии (TLH)</div><div class="m-d">В компании никто не переключает трек «потому что надоело»: за скип голосуют. Ожидаю рост средней длительности сессии и снижение skip rate внутри групповых сессий.</div></div>
-      <div class="metric"><div class="m-t">Retention хозяина</div><div class="m-d">«Итоги вечера» — сохранённый плейлист с именами участников. Соцграф, которого у Яндекс Музыки почти нет, начинает наполняться: повод вернуться и повод позвать снова.</div></div>
-      <div class="metric"><div class="m-t">Доля активных участников</div><div class="m-d">Очередь переводит гостя из слушателя в соавтора вечера. Метрика — доля участников, поставивших хотя бы один трек. Активное действие в первой сессии обычно сильнее всего предсказывает возврат.</div></div>
-      <div class="metric"><div class="m-t">Отвал в первые минуты</div><div class="m-d">Групповая сессия чаще всего умирает на старте: «не та музыка». Вайб-пресет должен снижать скипы и дизлайки в первые 10 минут. Сравниваю сессии с выбранным вайбом и без него.</div></div>
-      <div class="metric"><div class="m-t">Качество рекомендаций</div><div class="m-d">Лайки и скипы в групповом контексте — новый тип сигнала для ARGUS: не «что я люблю», а «что заходит аудитории». Данные, которых сейчас нет ни у кого.</div></div>
-      <div class="metric guard"><div class="m-t">Guardrail: личные рекомендации</div><div class="m-d">Прослушивания в группе не должны портить личную «Мою волну» — как и в «Моей волне на двоих», в профиль уходят только явные лайки. Слежу за долей дизлайков в личной волне после групповых сессий.</div></div>
+      <div class="metric"><div class="m-k">Целевая</div><div class="m-t">LTV подписчика</div><div class="m-d">ARPU × срок жизни. При 449 ₽/мес каждый удержанный лишний год — это 5,4 тыс ₽ с человека. На базе в 51,9 млн подписчиков снижение месячного оттока всего на 0,1 п.п. даёт порядка 23 млн ₽ удержанной выручки в месяц. Именно здесь фича зарабатывает, а не на новых покупках.</div></div>
+      <div class="metric"><div class="m-k">Целевая</div><div class="m-t">Отток участников групповых сессий</div><div class="m-d">Когортное сравнение: подписчики, побывавшие в «Нашей волне», против контрольной группы с похожим профилем прослушиваний. Гипотеза — вечер с друзьями внутри продукта привязывает сильнее любой персональной рекомендации, потому что к сервису добавляется социальная связь.</div></div>
+      <div class="metric"><div class="m-k">Целевая</div><div class="m-t">Новые платящие и их CAC</div><div class="m-d">Из воронки ниже — около 0,03 платящего на сессию, то есть одна покупка примерно на 30 вечеринок. Немного, но стоимость привлечения нулевая: трафик приводит сам продукт. Метрика нужна, чтобы трезво видеть потолок этого канала и не принимать его за основной источник роста.</div></div>
+      <div class="metric"><div class="m-k">Ведущий индикатор</div><div class="m-t">Доля участников с действием</div><div class="m-d">Сколько человек из комнаты поставили трек или лайкнули, а не просто послушали. Активное действие в первой сессии обычно предсказывает возврат лучше, чем время прослушивания. Это первая метрика, которая покажет, работает ли очередь.</div></div>
+      <div class="metric"><div class="m-k">Ведущий индикатор</div><div class="m-t">Skip rate первых 10 минут</div><div class="m-d">Прокси качества подбора вайба. Групповая сессия чаще всего разваливается на старте, когда музыка не попала в настроение компании. Сравниваю сессии с выбранным вайбом и без него: если пресет работает, скипы и дизлайки на старте падают, а сессия доживает до конца.</div></div>
+      <div class="metric"><div class="m-k">Ведущий индикатор</div><div class="m-t">Длительность сессии</div><div class="m-d">В компании никто не переключает трек «потому что надоело» — за смену вайба голосуют. Ожидаю, что групповые сессии длиннее одиночных. Это же питает ARGUS новым типом сигнала: не «что я люблю», а «что заходит аудитории».</div></div>
+      <div class="metric guard"><div class="m-k">Guardrail</div><div class="m-t">Личная волна не портится</div><div class="m-d">Прослушивания в группе не должны смещать личную «Мою волну» — как и в «Моей волне на двоих», в профиль уходят только явные лайки. Слежу за долей дизлайков в личной волне у тех, кто участвовал в групповых сессиях.</div></div>
+      <div class="metric guard"><div class="m-k">Guardrail</div><div class="m-t">Доля сессий с доминирующим участником</div><div class="m-d">Сколько сессий, где один человек поставил больше половины очереди. Это проверка обещания, которое даёт тумблер «Выравнивать вклад»: если таких сессий много, механика не работает или её не включают. Вечер превращается в чей-то личный плейлист, остальные перестают что-либо ставить, и сессия тихо умирает — при том что длительность прослушивания выглядит нормально, музыка-то играет.</div></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>Воронка в покупку</h2>
+    <p>Считаю на одну вечеринку: хозяин с подпиской и четверо гостей. Цифры иллюстративные — это прикидка порядка величин, чтобы понять, где узкое место, а не замер.</p>
+    <div class="funnel">
+      <div class="fn-row"><span class="fn-l">Гости в комнате</span><div class="fn-b"><i style="width:100%"></i></div><span class="fn-v">4</span></div>
+      <div class="fn-row"><span class="fn-l">Отсканировали QR и вошли</span><div class="fn-b"><i style="width:70%"></i></div><span class="fn-v">2,8</span></div>
+      <div class="fn-row"><span class="fn-l">Лайкнули или поставили трек</span><div class="fn-b"><i style="width:45%"></i></div><span class="fn-v">1,8</span></div>
+      <div class="fn-row"><span class="fn-l">Из них без Плюса</span><div class="fn-b pay"><i style="width:24%"></i></div><span class="fn-v">0,5</span></div>
+      <div class="fn-row"><span class="fn-l">Открыли итоги вечера</span><div class="fn-b pay"><i style="width:16%"></i></div><span class="fn-v">0,3</span></div>
+      <div class="fn-row"><span class="fn-l">Включили пробный период</span><div class="fn-b pay"><i style="width:9%"></i></div><span class="fn-v">0,08</span></div>
+      <div class="fn-row"><span class="fn-l">Дошли до первого списания</span><div class="fn-b pay"><i style="width:6%"></i></div><span class="fn-v">0,03</span></div>
+    </div>
+    <p class="fn-cap">Серые полосы проходят все гости, фиолетовые — только те, у кого нет подписки. Ширина полос схематичная, точные значения справа.</p>
+    <p><strong>Главный обрыв — четвёртый шаг, и он не про дизайн.</strong> Почти все гости уже платят, поэтому кандидатов на покупку остаётся меньше четверти комнаты. Расширить этот шаг улучшением экрана невозможно — он упирается в проникновение подписки, а не в интерфейс.</p>
+    <p><strong>Пейволл срабатывает не на вечеринке.</strong> Гость ничего не слушает со своего устройства: музыка играет из колонки хозяина, его телефон работает как пульт. Ограничивать его во время вечера бессмысленно и вредно. Платить он захочет на следующий день, когда решит унести плейлист с собой, — значит ключевой элемент воронки не экран в приложении, а пуш наутро: «Ваш вечер, 31 трек». Без него этап «открыли итоги» рушится, потому что приложение закрыли ещё в такси.</p>
+    <p><strong>Риск каннибализации.</strong> Подписка Плюс позволяет подключать до трёх друзей или родных. На вечеринке с живым хозяином-подписчиком самый естественный исход — не покупка, а просьба «закинь меня в свою подписку». Фича может съесть собственную воронку. Контрмера спорная, и я бы проверяла её тестом: либо показывать гостю оффер раньше, чем хозяин успеет предложить слот, либо наоборот считать заполнение семейных слотов успехом — оно удерживает хозяина сильнее, чем разовая продажа удержала бы гостя.</p>
+  </div>
+
+  <div class="block">
+    <h2>Нарезка на релизы</h2>
+    <p>Фича целиком — это слишком много для одного выката, и половину механик нет смысла строить, пока не подтвердилась базовая гипотеза «люди вообще подключаются к чужой сессии».</p>
+    <div class="rel">
+      <div class="rel-row"><div class="rel-n">MVP</div><div><div class="rel-t">Сессия, QR и общая очередь</div><div class="rel-d">Минимум, на котором читается главная гипотеза: подключаются ли гости и ставят ли они треки. Всё остальное здесь — украшение. Если доля участников с действием низкая, дальше идти не нужно.</div></div></div>
+      <div class="rel-row"><div class="rel-n">Итерация 2</div><div><div class="rel-t">Вайб вечера и «Встряхнуть вместе»</div><div class="rel-d">Подключается, когда ясно, что сессии живут. Решает следующую по важности проблему — сессия разваливается на старте из-за неподходящей музыки. Проверяется по skip rate первых десяти минут.</div></div></div>
+      <div class="rel-row"><div class="rel-n">Итерация 3</div><div><div class="rel-t">Режим «сюрприз», цвета и баланс вклада</div><div class="rel-d">Слой удовольствия и справедливости. Повышает длительность и повторяемость сессий, но без первых двух шагов бессмыслен.</div></div></div>
+      <div class="rel-row"><div class="rel-n">Итерация 4</div><div><div class="rel-t">Итоги вечера и музыкальные друзья</div><div class="rel-d">Работает на удержание и на соцграф. Выносится последним, потому что требует решений по приватности: кто кого видит после вечера и что остаётся в профиле.</div></div></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>Как проверяю</h2>
+    <p><strong>Главная сложность — фича социальная, и обычный A/B на уровне пользователя здесь протекает.</strong> Гость из контрольной группы физически оказывается в сессии, запущенной тестовой: он получает опыт фичи, хотя не должен. Эффект размывается, и тест показывает меньше, чем есть на самом деле. Поэтому рандомизация не по пользователям, а по кластерам — например по городам или по связным компонентам соцграфа, чтобы компания целиком попадала в одну ветку.</p>
+    <p><strong>Целевая группа:</strong> подписчики Плюса, которые регулярно включают «Мою волну» и имеют устройство воспроизведения вне телефона — колонку или Станцию. Без колонки сценарий «играем на компанию» не возникает, и такие пользователи только зашумят выборку. Старт на одном-двух городах.</p>
+    <p><strong>Метрика принятия решения</strong> — отток хозяев сессий на горизонте 28 дней против контроля. Проблема в том, что эффект на отток маленький и медленный: чтобы поймать его статзначимо, нужна либо огромная выборка, либо долгое окно. Поэтому решение «раскатывать или нет» принимаю по ведущим индикаторам — доле участников с действием, длительности сессии и доле сессий с повтором в течение месяца, — а отток читаю на длинном горизонте уже после раскатки, как подтверждение.</p>
+    <p><strong>Критерии успеха фиксирую до запуска</strong>, иначе есть соблазн подогнать их под результат. Для MVP это: не меньше половины приглашённых реально подключаются, не меньше трети подключившихся совершают действие, и доля хозяев, запустивших вторую сессию в течение месяца, заметно выше нуля. Guardrail — доля дизлайков в личной волне участников не растёт.</p>
+    <p><strong>Если не взлетит.</strong> Низкое подключение — проблема входа, чиню QR и авторизацию, а не фичу. Подключаются, но не добавляют треки — проблема ценности очереди, и тогда гипотеза про «не перебивая разговор» неверна. Сессии одноразовые — проблема удержания, и тогда ставка смещается на итоги вечера, то есть на то, что я отложила в четвёртую итерацию.</p>
+  </div>
+
+  <div class="block">
+    <h2>Состояния и крайние случаи</h2>
+    <p>Прототип показывает счастливый путь. Ниже то, что в нём не нарисовано, но без чего фича не уедет в разработку. Экран пустой очереди добавлен в прототип отдельно — это единственное состояние, которое меняет саму механику, а не только интерфейс.</p>
+    <div class="states">
+      <div class="st-row"><span class="st-dot"></span><div><div class="st-t">Очередь пуста</div><div class="st-d">Волна продолжает вести вечер сама, в выбранном вайбе. В плеере вместо списка — плашка «Ведёт волна» и приглашение поставить трек: он вклинится следующим, а не в конец.</div></div></div>
+      <div class="st-row"><span class="st-dot"></span><div><div class="st-t">В сессии остался один</div><div class="st-d">Групповые элементы скрываются, экран сворачивается обратно в обычную «Мою волну». Сессия не закрывается сразу — висит пятнадцать минут на случай, если компания вернётся, и предлагает позвать снова.</div></div></div>
+      <div class="st-row"><span class="st-dot"></span><div><div class="st-t">Гость потерял связь</div><div class="st-d">Аватар гаснет, но его треки остаются в очереди — вечер не должен спотыкаться из-за чужого интернета. Через пять минут гость выходит из состава, баланс вклада пересчитывается.</div></div></div>
+      <div class="st-row"><span class="st-dot warn"></span><div><div class="st-t">Хозяин потерял связь</div><div class="st-d">Состояние сессии живёт на сервере. Через две минуты права переходят тому, кто поставил больше треков, в комнате появляется плашка «Теперь вечер ведёт Лиза», музыка не прерывается.</div></div></div>
+      <div class="st-row"><span class="st-dot"></span><div><div class="st-t">Кворум за смену вайба не набран</div><div class="st-d">Счётчик голосов висит две минуты и сбрасывается. Иначе один человек накапливает голоса весь вечер и в какой-то момент меняет вайб в одиночку.</div></div></div>
+      <div class="st-row"><span class="st-dot warn"></span><div><div class="st-t">Участник отозвал согласие на удаление</div><div class="st-d">Тумблер «Убирать чужие треки» у хозяина блокируется, рядом поясняется почему. Согласие не хранится навсегда: оно действует в пределах одной сессии.</div></div></div>
+      <div class="st-row"><span class="st-dot"></span><div><div class="st-t">Подключение и ошибки</div><div class="st-d">Скелетон на время входа в комнату. Если сессия закрыта, заполнена или код устарел — отдельный экран с понятной причиной, а не общий текст про ошибку.</div></div></div>
     </div>
   </div>
 
@@ -392,6 +499,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;ba
       <li><b>Новые экраны</b><span>Подключение к сессии, Вайб вечера, «Наша волна» (хост), Очередь, «Наша волна» (гость), Итоги вечера</span></li>
       <li><b>Новые компоненты</b><span>Плашка «Слушать вместе», карточки вайба + строка свободного запроса, строка «почему этот трек», полоска «чей вечер», свёрнутая очередь в плеере, сегмент «видна / сюрприз», скрытый трек, «Встряхнуть вместе» с кворумом, карточка апселла Плюса</span></li>
       <li><b>Переиспользуется</b><span>Плеер «Моей волны», контекстные чипы, «Встряхнуть», люмены (свободный запрос), аватарки, bottom tab bar, система цветов вайба</span></li>
+      <li><b>Зона дизайнера</b><span>Прототип собран как продуктовый артефакт, не как финальный макет. Типографика — ближайший доступный аналог вместо фирменной гарнитуры, обложки — заглушки, состояния загрузки и ошибок не нарисованы. Это дорабатывается вместе с дизайнером; здесь зафиксированы сценарий, логика и правила.</span></li>
       <li><b>Токены</b><span>Радиусы <code>12 / 18 / 26 / 34</code>, фон <code>#08080A</code>, поверхности <code>rgba(255,255,255,.08–.14)</code> + <code>backdrop-blur 14–20</code></span></li>
       <li><b>Состояния</b><span>Гость без подписки (перемотка заблокирована, очередь доступна), очередь пустая → волна ведёт сама, режим «сюрприз», кворум не набран, участник вышел, сессия пустая</span></li>
       <li><b>Правила сессии</b><span>Лимита треков на человека нет — справедливость решается не запретом, а «Выравниванием вклада». Убрать чужой трек может только хозяин и только если все участники дали согласие при подключении: один отказ — и нельзя никому. Аккаунт нужен всем, включая гостей: без него некуда сохранить плейлист и не из чего собрать музыкальных друзей.</span></li>
@@ -783,10 +891,161 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;ba
         </div>
 
         <div class="sticky-cta">
-          <button class="btn primary">
+          <button class="btn primary" onclick="go('s3add')">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
             Поставить свой трек
           </button>
+        </div>
+      </section>
+
+      <!-- ====== S3e : Очередь пуста ====== -->
+      <section class="screen" id="s3e">
+        <div class="vibe">
+          <div class="blob b1" style="width:260px;height:260px;left:-40px;top:60px;background:#7B5CFF"></div>
+          <div class="blob b2" style="width:230px;height:230px;right:-50px;top:120px;background:#FF5C7A"></div>
+          <div class="blob b3" style="width:210px;height:210px;left:60px;top:280px;background:#FFB23D"></div>
+          <div class="blob b4" style="width:190px;height:190px;right:10px;top:330px;background:#35D6A4"></div>
+          <div class="blob b5" style="width:200px;height:200px;left:-20px;top:420px;background:#4DA3FF"></div>
+        </div>
+        <div class="scrim"></div>
+
+        <div class="status"><span>0:12</span><span class="sig">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4c1-.4 1.5-1.1 1.5-2S24 4.4 23 4z" fill="currentColor" opacity=".45"/></svg>
+        </span></div>
+
+        <div class="nav">
+          <button class="ico" onclick="go('s3')" aria-label="Назад"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="live"><span class="dot"></span>Наша волна · 5</div>
+          <button class="ico" onclick="go('s5')" aria-label="Завершить"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
+        </div>
+
+        <div class="body">
+          <div class="spacer" style="max-height:16px"></div>
+          <div class="cover" style="width:196px;height:196px;background:linear-gradient(150deg,#9B7BFF,#4A2A8A 55%,#1E1040)"></div>
+          <div class="spacer" style="max-height:20px"></div>
+
+          <div class="tinfo">
+            <h3 class="ttl" style="font-size:23px">Лосось</h3>
+            <p class="art">ЛСП</p>
+          </div>
+
+          <div class="spacer" style="max-height:14px"></div>
+
+          <div class="why">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35D6A4" stroke-width="2.2" stroke-linecap="round" style="flex:0 0 auto"><path d="M3 12a9 9 0 019-9 9 9 0 018 5M21 12a9 9 0 01-9 9 9 9 0 01-8-5"/><path d="M17 8h4V4M7 16H3v4"/></svg>
+            <div class="wt">Очередь закончилась — <b>ведёт волна</b></div>
+          </div>
+
+          <div class="balance">
+            <div class="bhead"><span class="bl">Чей вечер</span><span class="br">29 треков</span></div>
+            <div class="bbar">
+              <i style="flex:3;background:#7B5CFF"></i>
+              <i style="flex:3;background:#FF5C7A"></i>
+              <i style="flex:4;background:#FFB23D"></i>
+              <i style="flex:2;background:#35D6A4"></i>
+              <i style="flex:2;background:#4DA3FF"></i>
+            </div>
+          </div>
+
+          <div class="ctrls" style="padding-top:14px">
+            <button class="cbtn" aria-label="Участники"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M2.5 20c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/><path d="M16.5 5.2a3.4 3.4 0 010 5.6M18.5 14.9c2 .8 3.3 2.6 3.3 5.1"/></svg></button>
+            <button class="cbtn" aria-label="Не нравится"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M17 2h2a2 2 0 012 2v8a2 2 0 01-2 2h-2M17 14l-4.5 7a2.6 2.6 0 01-3.9-3l1.4-4H4.4a2.3 2.3 0 01-2.2-2.9l1.9-7A2.3 2.3 0 016.3 2H17v12z"/></svg></button>
+            <button class="cbtn main" aria-label="Пауза"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4.2" height="16" rx="1.6"/><rect x="13.8" y="4" width="4.2" height="16" rx="1.6"/></svg></button>
+            <button class="cbtn" aria-label="Нравится"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M17 2h2a2 2 0 012 2v8a2 2 0 01-2 2h-2M17 14l-4.5 7a2.6 2.6 0 01-3.9-3l1.4-4H4.4a2.3 2.3 0 01-2.2-2.9l1.9-7A2.3 2.3 0 016.3 2H17v12z" transform="rotate(180 12 12)"/></svg></button>
+            <button class="cbtn" aria-label="Дальше"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M5 5.6v12.8c0 .8.9 1.3 1.6.9l9.6-6.4a1 1 0 000-1.8L6.6 4.7c-.7-.4-1.6.1-1.6.9z"/><rect x="17.4" y="4.6" width="2.4" height="14.8" rx="1.2"/></svg></button>
+          </div>
+
+          <button class="cta" onclick="go('s3add')">
+            <span class="ico" style="background:rgba(255,255,255,.16);flex:0 0 auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            <div style="flex:1;min-width:0">
+              <div class="ct-t">Очередь пуста</div>
+              <div class="ct-s">Поставьте трек — он вклинится следующим</div>
+            </div>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:.5;flex:0 0 auto"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+
+          <div class="queue">
+            <div class="qh"><span>Волна поставила сама</span></div>
+            <div class="qrow">
+              <div class="qc" style="background:linear-gradient(140deg,#7BE0C0,#14544F)"></div>
+              <div class="qn"><div class="q1">Втюрилась</div><div class="q2">Дора</div></div>
+              <div class="qeta">только что</div>
+            </div>
+            <div class="qrow">
+              <div class="qc" style="background:linear-gradient(140deg,#8FB8D6,#1E3A52)"></div>
+              <div class="qn"><div class="q1">Пыяла</div><div class="q2">АИГЕЛ</div></div>
+              <div class="qeta">4 мин назад</div>
+            </div>
+          </div>
+
+          <div class="spacer" style="min-height:18px"></div>
+        </div>
+      </section>
+
+      <!-- ====== S3add : Поставить трек ====== -->
+      <section class="screen" id="s3add">
+        <div class="vibe">
+          <div class="blob b1" style="width:230px;height:230px;left:-60px;top:-40px;background:#7B5CFF;opacity:.4"></div>
+        </div>
+        <div class="scrim" style="background:linear-gradient(180deg,rgba(0,0,0,.4),#000 35%)"></div>
+
+        <div class="status"><span>23:26</span><span class="sig">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4c1-.4 1.5-1.1 1.5-2S24 4.4 23 4z" fill="currentColor" opacity=".45"/></svg>
+        </span></div>
+
+        <div class="nav">
+          <button class="ico" onclick="go('s3q')" aria-label="Назад"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div class="t">В нашу очередь</div>
+          <div style="width:34px"></div>
+        </div>
+
+        <div class="body">
+          <div class="spacer" style="max-height:8px;flex:0 0 8px"></div>
+          <div class="srch">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" style="opacity:.5;flex:0 0 auto"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.5-4.5"/></svg>
+            <span class="sq">джаз</span>
+            <span style="font-size:12.5px;color:rgba(255,255,255,.45)">Отмена</span>
+          </div>
+          <div style="padding:0 22px;margin-bottom:10px">
+            <span style="font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.4">Зелёным помечены треки, которые лягут в вайб вечера — «Уютный вечер»</span>
+          </div>
+
+          <div style="padding:0 22px">
+            <div class="qrow">
+              <div class="qc" style="background:linear-gradient(140deg,#E0A86A,#6B3B1E)"></div>
+              <div class="qn"><div class="q1">Blue in Green<span class="vtag">под вайб</span></div><div class="q2">Miles Davis</div></div>
+              <button class="addb" onclick="addTrack(this)" aria-label="Добавить"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <div class="qrow">
+              <div class="qc" style="background:linear-gradient(140deg,#C9A27E,#4A2C18)"></div>
+              <div class="qn"><div class="q1">Жди меня<span class="vtag">под вайб</span></div><div class="q2">Мгзавреби</div></div>
+              <button class="addb" onclick="addTrack(this)" aria-label="Добавить"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <div class="qrow">
+              <div class="qc" style="background:linear-gradient(140deg,#FF6B8A,#7A1733)"></div>
+              <div class="qn"><div class="q1">Демоны</div><div class="q2">Три дня дождя · уже в очереди</div></div>
+              <button class="addb done" aria-label="Уже добавлен"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></button>
+            </div>
+            <div class="qrow">
+              <div class="qc" style="background:linear-gradient(140deg,#8FB8D6,#1E3A52)"></div>
+              <div class="qn"><div class="q1">Take Five<span class="vtag">под вайб</span></div><div class="q2">The Dave Brubeck Quartet</div></div>
+              <button class="addb" onclick="addTrack(this)" aria-label="Добавить"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <div class="qrow">
+              <div class="qc" style="background:linear-gradient(140deg,#B07BFF,#2B1259)"></div>
+              <div class="qn"><div class="q1">Асфальт</div><div class="q2">Jakone, Kiliana</div></div>
+              <button class="addb" onclick="addTrack(this)" aria-label="Добавить"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+        </div>
+
+        <div class="sticky-cta">
+          <div class="note" style="margin:0 0 10px">Ваш трек заиграет через 3 трека.<br>В режиме «сюрприз» остальные увидят только ваше имя.</div>
+          <button class="btn primary" onclick="go('s3q')">Готово</button>
         </div>
       </section>
 
@@ -837,7 +1096,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;ba
 
           <div class="spacer" style="max-height:22px"></div>
 
-          <button class="cta" style="margin:0 20px 14px" onclick="fly(this,'🎵')">
+          <button class="cta" style="margin:0 20px 14px" onclick="go('s3add')">
             <span class="ico" style="background:rgba(255,255,255,.16);flex:0 0 auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             <div style="flex:1;min-width:0">
               <div class="ct-t">Поставить свой трек</div>
@@ -972,6 +1231,8 @@ var SCREENS=[
   {id:'s2b',n:'Вайб вечера'},
   {id:'s3',n:'Наша волна'},
   {id:'s3q',n:'Очередь'},
+  {id:'s3e',n:'Пустая очередь'},
+  {id:'s3add',n:'Поставить трек'},
   {id:'s4',n:'Экран гостя'},
   {id:'s5',n:'Итоги вечера'}
 ];
@@ -998,6 +1259,19 @@ SCREENS.forEach(function(s,i){
   b.onclick=function(){go(s.id);};
   nav.appendChild(b);
 });
+
+/* ---------- оглавление ---------- */
+(function(){
+  var t=document.getElementById('toc');
+  if(!t) return;
+  document.querySelectorAll('.brief .block').forEach(function(bl){
+    var h=bl.querySelector('h2'); if(!h) return;
+    var b=document.createElement('button');
+    b.textContent=h.textContent.replace(/ — .*$/,'');
+    b.onclick=function(){bl.scrollIntoView({behavior:'smooth',block:'start'});};
+    t.appendChild(b);
+  });
+})();
 
 /* ---------- QR ---------- */
 (function(){
@@ -1112,6 +1386,12 @@ function renderQueue(){
       '<button class="qx" aria-label="Убрать из очереди"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
     l.appendChild(row);
   });
+}
+
+function addTrack(b){
+  b.classList.add('done');
+  b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg>';
+  b.onclick=null;
 }
 
 /* ---------- встряхнуть вместе ---------- */
